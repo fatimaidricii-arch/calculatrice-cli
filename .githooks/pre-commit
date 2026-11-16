@@ -1,0 +1,19 @@
+
+#!/bin/sh
+
+echo "Running Maven tests and Checkstyle before commit..."
+
+mvn clean verify
+if [ $? -ne 0 ]; then
+    echo "ERROR: Maven verification failed. Commit aborted."
+    exit 1
+fi
+
+mvn checkstyle:check "-Dcheckstyle.config.location=config/checkstyle/checkstyle.xml"
+if [ $? -ne 0 ]; then
+    echo "ERROR: Checkstyle failed. Commit aborted."
+    exit 1
+fi
+
+echo "All checks passed. Commit allowed."
+exit 0
