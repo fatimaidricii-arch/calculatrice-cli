@@ -1,4 +1,3 @@
-
 #!/bin/sh
 
 echo "Running Maven tests and Checkstyle before commit..."
